@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Lightning: Adaptive Illumination Control for Robot Perception">
+  <meta property="og:title" content="Lightning: Adaptive Illumination Control for Robot Perception" />
+  <meta property="og:description" content="Adaptive Illumination Control for Robot Perception" />
+  <meta property="og:url" content="https://droneslab.github.io/Lightning/" />
+  <meta property="og:image" content="static/images/lighting-intro-3-staack.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <meta name="twitter:title" content="Lightning">
+  <meta name="twitter:description" content="Adaptive Illumination Control for Robot Perception">
+  <meta name="twitter:image" content="static/images/lighting-intro-3-staack.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="keywords" content="Active Illumination, Robotics, SLAM, Perception">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Lightning: Adaptive Illumination Control for Robot Perception</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Lightning: Adaptive Illumination Control for Robot Perception</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://yash.turkar.in/" target="_blank">Yash Turkar</a>,</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Shekoufeh Sadeghi</a>,</span>
+              <span class="author-block">
+                <a href="https://cse.buffalo.edu/faculty/kdantu/" target="_blank">Karthik Dantu</a></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">University at Buffalo, Buffalo, NY</span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <a href="https://www.buffalo.edu/">
+                <img style="width:30%; padding-right: 15px;" src="static/images/ub_logo.png">
+              </a>
+              <a href="http://drones.cse.buffalo.edu/">
+                <img style="width:30%; height:auto; padding-bottom: 25px;" src="static/images/drones_logo.png">
+              </a>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Arxiv PDF link -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper (Coming Soon)</span>
+                  </a>
+                </span>
+
+                <!-- Github link -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (Coming Soon)</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <img src="static/images/teaser-final.png" alt="Lightning Teaser" style="width:100%;">
+          </div>
+        </div>
+        <h2 class="subtitle has-text-centered" style="margin-top: 20px;">
+          <strong>(a)</strong> Oracle intensity schedule over time. <strong>(b)</strong> CLID relighting on robot
+          sequences. Raw images are captured at 50% intensity and relit to generate images at 0-100% intensities.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Robot perception under low light or high dynamic range is usually improved downstream—via more robust
+              feature extraction, image enhancement, or closed-loop exposure control. However, all of these approaches
+              are limited by the image captured these conditions. An alternate approach is to utilize a programmable
+              onboard light that adds to ambient illumination and improves captured images. However, it is not
+              straightforward to predict its impact on image formation. Illumination interacts nonlinearly with depth,
+              surface reflectance, and scene geometry. It can both reveal structure and induce failure modes such as
+              specular highlights and saturation. These challenges are further exacerbated by robot motion through a
+              scene.
+            </p>
+            <p>
+              We introduce <strong>Lightning</strong>, a closed-loop illumination-control framework for visual SLAM that
+              combines relighting, offline optimization, and imitation learning. This is performed in three stages.
+              First, we train a Co-Located Illumination Decomposition (CLID) relighting model that decomposes a robot
+              observation into an ambient component and a light-contribution field. CLID enables physically consistent
+              synthesis of the same scene under alternative light intensities and thereby creates dense multi-intensity
+              training data without requiring us to repeatedly re-run trajectories.
+            </p>
+            <p>
+              Second, using these synthesized candidates, we formulate an offline Optimal Intensity Schedule (OIS)
+              problem that selects illumination levels over a sequence trading off SLAM-relevant image utility against
+              power consumption and temporal smoothness.
+            </p>
+            <p>
+              Third, we distill this ideal solution into a real-time controller through behavior cloning, producing an
+              Illumination Control Policy (ILC) that generalizes beyond the initial training distribution and runs
+              online on a mobile robot to command discrete light-intensity levels. Across our evaluation, Lightning
+              substantially improves SLAM trajectory robustness while reducing unnecessary illumination power.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">CLID Relighting</h2>
+          <div class="content has-text-justified">
+            <p>
+              We propose a Co-Located Illumination Decomposition (CLID) network which enables relighting of scenes under
+              arbitrary light intensities. This allows us to "expand" a recorded robot sequence into a dense, virtual
+              dataset that contains all candidate light intensities at each time step.
+            </p>
+            <p class="subtitle has-text-centered">
+              (See teaser above for examples of CLID relighting)
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Experimental Results</h2>
+      <div class="content">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <img src="static/images/figure5.png" alt="ILC's intensity schedule versus fixed baselines"
+              style="width:100%;">
+            <p class="is-size-6 has-text-centered">
+              <strong>Figure 5:</strong> <em>ILC's intensity schedule versus fixed baselines.</em> The imitation policy,
+              deployed on a robot, outputs a per-frame light intensity (blue), and is compared against 0% (green-dashed)
+              and 100% (red-dashed) fixed-intensity baselines. Insets show frames at the corresponding timestamps: (a)
+              ILC increases illumination when entering a low-light region to preserve image utility; (b) ILC reduces
+              illumination near a reflective whiteboard to mitigate specular saturation; (c) ILC chooses an intermediate
+              illumination level to balance competing effects of low light and specular reflection.
+            </p>
+          </div>
+        </div>
+        <p>
+          We compare our method (Lightning) against fixed intensity baselines (0% and 100%). Lightning consistently
+          outperforms both baselines in terms of trajectory completion ratio and Weighted RMSE.
+        </p>
+        <div class="table-container">
+          <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th rowspan="2">Sequence</th>
+                <th colspan="2" class="has-text-centered">0% Baseline</th>
+                <th colspan="2" class="has-text-centered">Lightning (Online)</th>
+                <th colspan="2" class="has-text-centered">100% Baseline</th>
+                <th colspan="2" class="has-text-centered">Lightning Stats</th>
+              </tr>
+              <tr>
+                <th>Ratio (C) &uarr;</th>
+                <th>WRMSE &darr;</th>
+                <th>Ratio (C) &uarr;</th>
+                <th>WRMSE &darr;</th>
+                <th>Ratio (C) &uarr;</th>
+                <th>WRMSE &darr;</th>
+                <th>Light &mu; (%)</th>
+                <th>Power (W)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>113dark</code></td>
+                <td class="has-text-danger">0.26</td>
+                <td>2.756</td>
+                <td class="has-text-weight-bold">0.89</td>
+                <td>1.405</td>
+                <td class="has-text-danger">0.44</td>
+                <td class="has-text-weight-bold">0.641</td>
+                <td>48.28</td>
+                <td>19.86</td>
+              </tr>
+              <tr>
+                <td><code>kitchenloop</code></td>
+                <td class="has-text-danger">0.48</td>
+                <td>0.744</td>
+                <td class="has-text-weight-bold">0.91</td>
+                <td class="has-text-weight-bold">0.393</td>
+                <td>0.88</td>
+                <td>0.425</td>
+                <td>60.42</td>
+                <td>22.45</td>
+              </tr>
+              <tr>
+                <td><code>start2corr</code></td>
+                <td>0.95</td>
+                <td>0.220</td>
+                <td class="has-text-weight-bold">0.99</td>
+                <td class="has-text-weight-bold">0.123</td>
+                <td>0.98</td>
+                <td>0.249</td>
+                <td>47.33</td>
+                <td>19.66</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@inproceedings{lightning2024,
+  title={Lightning: Adaptive Illumination Control for Robot Perception},
+  author={Anonymous Authors},
+  year={2026}
+}</code></pre>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>
+          Page template borrowed from <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">Academic
+            Project Page Template</a>.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
